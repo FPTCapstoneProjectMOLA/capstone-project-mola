@@ -1,0 +1,31 @@
+@(authors: List[AuthorEntity])
+
+@main("Welcome to Play") {
+    <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>
+
+    @*<ul id="persons"></ul>*@
+
+
+
+    <form method="POST" action="@routes.PersonController.addPerson()">
+        <input type="text" name="authorName"/>
+        <button>Add Person</button>
+    </form>
+
+    <table id="tblAuthor" border="1">
+        <tr>
+            <td>ID</td>
+            <td>Author</td>
+            <td>size</td>
+            <td>Action</td>
+        </tr>
+        @authors.map(author => {
+            <tr>
+                <td>{author.getId}</td>
+                <td>{author.getAuthorName}</td>
+                <td>{author.getBooksById.size}</td>
+                <td><a href={"/delete/" + author.getId}>Delete</a><a hreft={"/update/" + author.getId}>Update</a></td>
+            </tr>
+        })
+    </table>
+}
